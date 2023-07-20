@@ -6,13 +6,13 @@ const Header = () => {
     return (
         <div className="header">
             <div className="logo">
-                <a href="#"><img src={svg} alt="Your SVG" /></a>
+                <Button buttonName={<img src={svg} alt="Your SVG" />} navigatePath='/' isNavigationType={true} />
             </div>
             <div className="nav_items">
                 <div className="item1">
-                    <Button buttonName='Sign Up' classList='signup_btn btn' />
+                    <Button buttonName='Sign Up' classList='signup_btn btn' navigatePath='/signup' isNavigationType={true} />
                 </div>
-                <Button buttonName='Login' classList='login_btn btn' />
+                <Button buttonName='Login' classList='login_btn btn' navigatePath='/login' isNavigationType={true} />
             </div>
         </div>
     )
