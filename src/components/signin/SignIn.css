@@ -1,0 +1,60 @@
+.signin {
+    background-color: #FDFDFD;
+    display: flex;
+    flex-direction: column;
+    padding: 19px 48px;
+    border-radius: 20px;
+    border: 3px solid black;
+}
+
+@media screen and (max-width: 576px) {
+    .signin {
+        width: 100vw;
+    }
+}
+
+@media screen and (min-width: 576px) {
+    .signin {
+        width: 70vw;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .signin {
+        width: 60vw;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .signin {
+        width: 40vw;
+    }
+}
+
+.heading {
+    font-size: 40px;
+    color: black;
+    align-self: center;
+    background-color: transparent;
+
+    margin-bottom: 57px;
+}
+
+.inputBox {
+    background-color: transparent;
+    height: 67px;
+    color: black;
+    border-radius: 10px;
+    background-color: #D9D9D9;
+    border: 3px solid black;
+    padding-left: 26px;
+    font-size: 20px;
+
+    margin-bottom: 57px;
+}
+
+.signin_login_btn {
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+}
