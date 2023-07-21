@@ -1,6 +1,6 @@
 import React from "react";
 import './SignUpPage.css';
-import SignUp from "../../components/signup/SignUp";
+import { SignUp } from "../../components/signup/SignUp";
 
 const SignUpPage = () => {
     return (

@@ -86,3 +86,8 @@ input[type=number] {
     color: black;
     text-align: center;
 }
+
+.error_message {
+    color: red;
+    background-color: transparent;
+}

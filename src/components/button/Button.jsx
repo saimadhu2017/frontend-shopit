@@ -6,7 +6,8 @@ const Button = (props) => {
         buttonName,
         classList,
         navigatePath,
-        isNavigationType
+        isNavigationType,
+        onClick
     } = props;
 
     if (isNavigationType) {
@@ -16,7 +17,7 @@ const Button = (props) => {
     }
     else {
         return (
-            <a href="" className={classList}>{buttonName}</a>
+            <button className={classList} onClick={onClick}>{buttonName}</button>
         )
     }
 }
