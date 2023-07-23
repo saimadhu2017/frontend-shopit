@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Button from '../button/Button';
 import './SignUp.css';
 import * as utils from './SignUp';
+import { signUpApi } from '../../apis/auth';
+import { toast } from 'react-toastify';
 
 export const SignUp = () => {
     const [formData, setFormData] = useState({
@@ -46,6 +48,27 @@ export const SignUp = () => {
             errorMessage: '* Please Accept Our Terms And Conditions'
         }
     })
+    const [disableSubmitButton, setDisableSubmitButton] = useState(false);
+    const isInitialMount = useRef(true);
+    useEffect(() => {
+        if (isInitialMount.current) {
+            isInitialMount.current = false
+        }
+        else {
+            if (disableSubmitButton) {
+                const bodyData = {
+                    first_name: formData.first_name.value,
+                    last_name: formData.last_name.value,
+                    mail: formData.mail.value,
+                    phone: formData.phone.value,
+                    country: formData.country.value,
+                    password: formData.password.value
+                }
+                utils.readyToCreatUser(bodyData, disableSubmitButton, setDisableSubmitButton)
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [disableSubmitButton])
     return (
         <div className="signup">
             <div className="heading">Sign Up</div>
@@ -135,7 +158,11 @@ export const SignUp = () => {
                 <label htmlFor="chk_box_id" className='terms_condition_label'>By selecting "Sign up" I agree to the Shopit Terms. Learn about how we use and protect your data in our Privacy Policy.</label>
             </div>
             <div className="signup_submit_btn">
-                <Button buttonName='Sign Up' classList='signup_btn btn' onClick={() => { utils.onSubmit(formData, setFormData) }} />
+                <Button
+                    buttonName='Sign Up'
+                    classList={!disableSubmitButton ? 'signup_btn btn' : 'signup_btn_disable btn_disable'}
+                    onClick={() => { !disableSubmitButton && utils.onSubmit(formData, setFormData, disableSubmitButton, setDisableSubmitButton) }}
+                />
             </div>
         </div>
     )
@@ -237,7 +264,7 @@ export const handleReEnterPassword = (event, formData, setFormData) => {
     })
 }
 
-export const onSubmit = (formData, setFormData) => {
+export const onSubmit = (formData, setFormData, disableSubmitButton, setDisableSubmitButton) => {
     if (!formData.country.value) {
         setFormData({
             ...formData,
@@ -284,6 +311,29 @@ export const onSubmit = (formData, setFormData) => {
             return;
         }
     }
-    console.log(formData);
-    //TODO: Call the SIGNUP API to register the user and also you need to disable the button or whole UI screen to tell the User to wait 
+    setDisableSubmitButton(!disableSubmitButton);
+
+}
+
+export const readyToCreatUser = (bodyData, disableSubmitButton, setDisableSubmitButton) => {
+    const signUpApiPromise = signUpApi(bodyData);
+    toast.promise(signUpApiPromise, {
+        pending: {
+            render() {
+                return ('Creating Your Account Please wait...')
+            }
+        },
+        error: {
+            render(err) {
+                setDisableSubmitButton(!disableSubmitButton)
+                return (err?.data?.response?.data?.err || 'Seems like server is down please try after some time')
+            }
+        },
+        success: {
+            render(response) {
+                setDisableSubmitButton(!disableSubmitButton)
+                return (response?.data?.data?.status === 'success' ? 'Your Account got created' : 'We cannot create your account some problem happened')
+            }
+        }
+    }, { position: toast.POSITION.TOP_CENTER })
 }

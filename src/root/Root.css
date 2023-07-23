@@ -1,0 +1,11 @@
+.Toastify__toast-container {
+    background-color: transparent;
+}
+
+.Toastify__toast {
+    background-color: black;
+}
+
+.Toastify__toast * {
+    background-color: black;
+}
