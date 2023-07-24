@@ -4,6 +4,7 @@ import './SignUp.css';
 import * as utils from './SignUp';
 import { signUpApi } from '../../apis/auth';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 export const SignUp = () => {
     const [formData, setFormData] = useState({
@@ -50,6 +51,7 @@ export const SignUp = () => {
     })
     const [disableSubmitButton, setDisableSubmitButton] = useState(false);
     const isInitialMount = useRef(true);
+    const navigate = useNavigate();
     useEffect(() => {
         if (isInitialMount.current) {
             isInitialMount.current = false
@@ -64,7 +66,7 @@ export const SignUp = () => {
                     country: formData.country.value,
                     password: formData.password.value
                 }
-                utils.readyToCreatUser(bodyData, disableSubmitButton, setDisableSubmitButton)
+                utils.readyToCreatUser(bodyData, disableSubmitButton, setDisableSubmitButton, navigate)
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -315,7 +317,7 @@ export const onSubmit = (formData, setFormData, disableSubmitButton, setDisableS
 
 }
 
-export const readyToCreatUser = (bodyData, disableSubmitButton, setDisableSubmitButton) => {
+export const readyToCreatUser = (bodyData, disableSubmitButton, setDisableSubmitButton, navigate) => {
     const signUpApiPromise = signUpApi(bodyData);
     toast.promise(signUpApiPromise, {
         pending: {
@@ -332,6 +334,7 @@ export const readyToCreatUser = (bodyData, disableSubmitButton, setDisableSubmit
         success: {
             render(response) {
                 setDisableSubmitButton(!disableSubmitButton)
+                navigate('/login')
                 return (response?.data?.data?.status === 'success' ? 'Your Account got created' : 'We cannot create your account some problem happened')
             }
         }

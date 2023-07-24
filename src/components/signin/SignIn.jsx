@@ -5,6 +5,7 @@ import { handleEmail } from '../signup/SignUp';
 import { signInApi } from '../../apis/auth';
 import { toast } from 'react-toastify';
 import * as utils from './SignIn';
+import { useNavigate } from 'react-router-dom';
 
 export const SignIn = () => {
     const [formData, setFormData] = useState({
@@ -21,13 +22,15 @@ export const SignIn = () => {
     })
     const [disableSubmitButton, setDisableSubmitButton] = useState(false);
     const isInitialMount = useRef(true);
+    const navigate = useNavigate()
+
     useEffect(() => {
         if (isInitialMount.current) {
             isInitialMount.current = false
         }
         else {
             if (disableSubmitButton) {
-                utils.readyToSignInUser(formData, disableSubmitButton, setDisableSubmitButton)
+                utils.readyToSignInUser(formData, disableSubmitButton, setDisableSubmitButton, navigate)
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -79,7 +82,7 @@ export const onSubmit = (formData, setFormData, disableSubmitButton, setDisableS
     setDisableSubmitButton(!disableSubmitButton)
 }
 
-export const readyToSignInUser = (formData, disableSubmitButton, setDisableSubmitButton) => {
+export const readyToSignInUser = (formData, disableSubmitButton, setDisableSubmitButton, navigate) => {
     const signInApiPromise = signInApi({ mail: formData.mail.value, password: formData.password.value });
     toast.promise(signInApiPromise, {
         pending: {
@@ -96,6 +99,7 @@ export const readyToSignInUser = (formData, disableSubmitButton, setDisableSubmi
         success: {
             render(response) {
                 setDisableSubmitButton(!disableSubmitButton)
+                navigate('/home')
                 return (response?.data?.data?.status === 'success' ? 'Sign In Successfull' : 'We cannot Sign you in now please try later..')
             }
         }
