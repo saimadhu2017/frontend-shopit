@@ -8,6 +8,7 @@ import * as utils from './SignIn';
 import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateUserSignInAction } from '../../redux/session/sessionAction'
+import cookies from "js-cookie";
 
 const mapDispatchToProps = (dispatch) => {
     return ({
@@ -114,10 +115,14 @@ export const readyToSignInUser = (formData, disableSubmitButton, setDisableSubmi
         },
         success: {
             render(response) {
+                const { status, data } = response?.data?.data || {}
+                const inOneMinute = new Date(new Date().getTime() + 60000);
+                cookies.set('jwtSessionToken', data?.jwtToken, { expires: inOneMinute })
+                cookies.set('id', data?.userId, { expires: inOneMinute })
                 props.updateUserSignInAction({ isUserSignedin: true })
                 setDisableSubmitButton(!disableSubmitButton)
                 navigate('/home')
-                return (response?.data?.data?.status === 'success' ? 'Sign In Successfull' : 'We cannot Sign you in now please try later..')
+                return (status === 'success' ? 'Sign In Successfull' : 'We cannot Sign you in now please try later..')
             }
         }
     }, { position: toast.POSITION.TOP_CENTER })
