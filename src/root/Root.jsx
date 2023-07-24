@@ -4,14 +4,16 @@ import { Outlet } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from 'react-toastify';
 import './Root.css';
+import { Provider } from 'react-redux'
+import store from '../redux/store'
 
 const Root = () => {
     return (
-        <React.Fragment>
+        <Provider store={store}>
             <ToastContainer />
             <Header />
             <Outlet />
-        </React.Fragment>
+        </Provider>
     )
 }
 
