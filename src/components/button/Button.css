@@ -36,6 +36,12 @@
     background-color: #3A2F2F;
 }
 
+.login_btn_disable {
+    background-color: #3A2F2Fb0;
+    color: #ffffffb0;
+    border-color: #00000020;
+}
+
 .btn:hover {
     transform: translate(2px, -2px);
     box-shadow: -5px 5px #00000081;
