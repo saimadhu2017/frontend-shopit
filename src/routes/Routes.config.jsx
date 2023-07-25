@@ -1,3 +1,5 @@
+import { ProtectedAnonymous } from "../components/protectedAnonymous/ProtectedAnonymous";
+import { ProtectedLoggedIn } from "../components/protectedLoggedIn/ProtectedLoggedIn";
 import HomePage from "../pages/home/HomePage";
 import LoginPage from "../pages/login/LoginPage";
 import SignUpPage from "../pages/signup/SignUpPage";
@@ -5,15 +7,15 @@ import SignUpPage from "../pages/signup/SignUpPage";
 const routeList = [
     {
         path: 'home',
-        element: <HomePage />
+        element: <ProtectedLoggedIn Component={HomePage} />
     },
     {
         path: 'login',
-        element: <LoginPage />
+        element: <ProtectedAnonymous Component={LoginPage} />
     },
     {
         path: 'signup',
-        element: <SignUpPage />
+        element: <ProtectedAnonymous Component={SignUpPage} />
     },
     {
         path: '*',

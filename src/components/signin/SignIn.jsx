@@ -119,6 +119,7 @@ export const readyToSignInUser = (formData, disableSubmitButton, setDisableSubmi
                 const inOneMinute = new Date(new Date().getTime() + 60000);
                 cookies.set('jwtSessionToken', data?.jwtToken, { expires: inOneMinute })
                 cookies.set('id', data?.userId, { expires: inOneMinute })
+                sessionStorage.setItem('sessionCreated', 'true')
                 props.updateUserSignInAction({ isUserSignedin: true })
                 setDisableSubmitButton(!disableSubmitButton)
                 navigate('/home')
