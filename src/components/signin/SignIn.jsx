@@ -116,7 +116,7 @@ export const readyToSignInUser = (formData, disableSubmitButton, setDisableSubmi
         success: {
             render(response) {
                 const { status, data } = response?.data?.data || {}
-                const inOneMinute = new Date(new Date().getTime() + 60000);
+                const inOneMinute = new Date(new Date().getTime() + 500000);// nearly 8.33 minutes
                 cookies.set('jwtSessionToken', data?.jwtToken, { expires: inOneMinute })
                 cookies.set('id', data?.userId, { expires: inOneMinute })
                 sessionStorage.setItem('sessionCreated', 'true')
