@@ -1,8 +1,11 @@
+import React from "react";
+import { SearchProducts } from "../../components/searchProducts/SearchProducts";
+
 const HomePage = () => {
     return (
-        <>
-            <h1>Welcome to Home Page</h1>
-        </>
+        <React.Fragment>
+            <SearchProducts />
+        </React.Fragment>
     )
 }
 

@@ -48,3 +48,21 @@
     transition: 0.4s ease;
     cursor: pointer;
 }
+
+.search_product_btn {
+    background-color: #18592E;
+    width: 114px;
+    height: 45px;
+    border-radius: 20px;
+    font-size: 15px;
+}
+
+.search_product_btn_disable {
+    background-color: #18592eb0;
+    color: #ffffffb0;
+    border-color: #00000020;
+    width: 114px;
+    height: 45px;
+    border-radius: 20px;
+    font-size: 15px;
+}

@@ -10,5 +10,5 @@ export const ProtectedAnonymous = (props) => {
         return (<Component />)
     }
 
-    return (<Navigate to={'/test'} />)
+    return (<Navigate to={'/home'} />)
 }

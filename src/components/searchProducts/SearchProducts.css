@@ -1,0 +1,25 @@
+.search_products {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputBox_search {
+    height: 67px;
+    color: black;
+    border-radius: 10px;
+    background-color: #D9D9D9;
+    border: 3px solid black;
+    padding-left: 26px;
+    font-size: 20px;
+    width: 50vw;
+}
+
+.inputBox_search:focus {
+    outline: 0px;
+}
+
+.search_input_btn_div {
+    background-color: transparent;
+    margin-left: 30px;
+}
