@@ -7,7 +7,8 @@ export const ProductCard = (props) => {
     const {
         product_name,
         brand_name,
-        final_price
+        final_price,
+        in_store
     } = sampleProduct
     return (
         <div className='product_card'>
@@ -25,9 +26,9 @@ export const ProductCard = (props) => {
                 {final_price}
             </div>
             <div className="product_card_action">
-                <ProductAction
-                    actionType={'add'}
-                />
+                {
+                    !in_store ? <ProductAction actionType={'ooo'} /> : <ProductAction actionType={'add'} />
+                }
             </div>
             <Button
                 isNavigationType={true}

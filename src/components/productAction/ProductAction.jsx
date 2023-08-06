@@ -20,6 +20,12 @@ export const ProductAction = (props) => {
         return null
     }
     if (actionType === 'ooo') {
-        return null
+        return (
+            <ul>
+                <li className="product_ooo">
+                    <span className='product_ooo_text'>This product is out of stock</span>
+                </li>
+            </ul>
+        )
     }
 }
