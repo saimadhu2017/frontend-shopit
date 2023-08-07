@@ -7,3 +7,22 @@
     background-color: #FDFDFD;
     color: black;
 }
+
+.product_update {
+    background-color: transparent;
+    display: flex;
+}
+
+.product_quantity_value {
+    border-radius: 20px;
+    width: 70px;
+    height: 30px;
+    background-color: transparent;
+    color: black;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    margin: 0px 10px;
+}

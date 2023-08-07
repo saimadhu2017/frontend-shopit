@@ -74,3 +74,19 @@
     font-size: 15px;
     background-color: #E08923;
 }
+
+.btn_update_product_quantity {
+    font-size: 20px;
+    border: 0px;
+    color: black;
+    height: 30px;
+    width: 14px;
+    background-color: transparent;
+}
+
+.btn_update_product_quantity:hover {
+    transform: none;
+    box-shadow: none;
+    transition: none;
+    cursor: pointer;
+}

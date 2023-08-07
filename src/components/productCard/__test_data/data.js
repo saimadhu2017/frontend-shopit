@@ -8,5 +8,6 @@ exports.sampleProduct = {
     in_store: 2,
     brand_name: "apple",
     category_name: "electronics",
-    shop_seller_name: "Apple BKC"
+    shop_seller_name: "Apple BKC",
+    quantity_in_cart: 1
 }

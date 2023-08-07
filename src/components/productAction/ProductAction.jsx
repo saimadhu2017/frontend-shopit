@@ -4,7 +4,8 @@ import Button from '../button/Button';
 
 export const ProductAction = (props) => {
     const {
-        actionType
+        actionType,
+        quantity_in_cart
     } = props
     if (actionType === 'add') {
 
@@ -17,7 +18,21 @@ export const ProductAction = (props) => {
         )
     }
     if (actionType === 'update') {
-        return null
+        return (
+            <div className="product_update">
+                <Button
+                    buttonName='-'
+                    classList={'btn btn_update_product_quantity'}
+                />
+                <div className="product_quantity_value">
+                    {quantity_in_cart}
+                </div>
+                <Button
+                    buttonName='+'
+                    classList={'btn btn_update_product_quantity'}
+                />
+            </div>
+        )
     }
     if (actionType === 'ooo') {
         return (
