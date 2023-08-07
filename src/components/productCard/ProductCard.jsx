@@ -1,7 +1,6 @@
 import Button from '../button/Button'
 import { ProductAction } from '../productAction/ProductAction'
-import './ProductCard.css'
-import { sampleProduct } from './__test_data/data'
+import './ProductCard.css';
 
 export const ProductCard = (props) => {
     const {
@@ -10,7 +9,7 @@ export const ProductCard = (props) => {
         final_price,
         in_store,
         quantity_in_cart
-    } = sampleProduct
+    } = props
     return (
         <div className='product_card'>
             <div className="product_title">{product_name}</div>

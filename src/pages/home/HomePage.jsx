@@ -1,12 +1,12 @@
 import React from "react";
 import { SearchProducts } from "../../components/searchProducts/SearchProducts";
-import { ProductCard } from "../../components/productCard/ProductCard";
+import { ProductListingResults } from "../../components/productListingResults/ProductListingResults";
 
 const HomePage = () => {
     return (
         <React.Fragment>
             <SearchProducts />
-            <ProductCard />
+            <ProductListingResults />
         </React.Fragment>
     )
 }
