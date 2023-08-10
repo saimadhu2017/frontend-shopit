@@ -6,10 +6,12 @@ import { ToastContainer } from 'react-toastify';
 import './Root.css';
 import { Provider } from 'react-redux'
 import store from '../redux/store'
+import { FullScreenLoader } from "../components/fullScreenLoader/FullScreenLoader";
 
 const Root = () => {
     return (
         <Provider store={store}>
+            <FullScreenLoader />
             <ToastContainer />
             <Header />
             <Outlet />

@@ -57,8 +57,3 @@
     display: flex;
     justify-content: center;
 }
-
-.error_message {
-    color: red;
-    background-color: transparent;
-}
