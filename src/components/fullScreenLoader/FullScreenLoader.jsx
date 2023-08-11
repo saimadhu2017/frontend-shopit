@@ -3,16 +3,17 @@ import './FullScreenLoader.css';
 
 const mapStateToProps = (state) => {
     return ({
-        showLoader: state.updateShowLoader.showLoader
+        showLoader: state.updateShowLoader.showLoader,
+        showTransparentPageLoad: state.updateShowLoader.showTransparentPageLoad
     })
 }
 
 export const FullScreenLoader = connect(mapStateToProps)(
     (props) => {
-        const { showLoader } = props;
+        const { showLoader, showTransparentPageLoad } = props;
         if (showLoader) {
             return (
-                <div className="loader-container">
+                <div className={showTransparentPageLoad ? "loader-container" : "loader-container loader-container-miscellaneous"}>
                     <div className="cs_square">
                         <div className="cs_square1">
                         </div>

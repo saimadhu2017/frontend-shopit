@@ -10,6 +10,10 @@
     align-items: center;
 }
 
+.loader-container-miscellaneous {
+    background-color: #715397;
+}
+
 .cs_square {
     width: 100px;
     height: 100px;

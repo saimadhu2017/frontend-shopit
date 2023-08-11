@@ -50,7 +50,7 @@ export const onSubmit = (data, methods) => {
         })
         return
     }
-    loadApiAction({ showLoader: true })
+    loadApiAction({ showLoader: true, showTransparentPageLoad: true })
     const jwtSessionToken = cookies.get('jwtSessionToken');
     const userId = cookies.get('id')
     const searchProductApiPromise = productSearchByName(userId, jwtSessionToken, searchValue);
@@ -66,7 +66,7 @@ export const onSubmit = (data, methods) => {
         }
     ).finally(
         () => {
-            loadApiAction({ showLoader: false })
+            loadApiAction({ showLoader: false, showTransparentPageLoad: true })
         }
     )
 }

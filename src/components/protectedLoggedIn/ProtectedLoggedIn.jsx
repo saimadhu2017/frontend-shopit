@@ -5,10 +5,12 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import { validateUserApi } from '../../apis/user';
 import { updateUserSignInAction } from '../../redux/session/sessionAction';
+import { loadApiAction } from '../../redux/loader/loaderAction';
 
 const mapDispatchToProps = (dispatch) => {
     return ({
-        updateUserSignInAction: (data) => { dispatch(updateUserSignInAction(data)) }
+        updateUserSignInAction: (data) => { dispatch(updateUserSignInAction(data)) },
+        loadApiAction: (data) => { dispatch(loadApiAction(data)) }
     })
 }
 
@@ -20,12 +22,13 @@ const mapStateToProps = (state) => {
 
 export const ProtectedLoggedIn = connect(mapStateToProps, mapDispatchToProps)(
     (props) => {
-        const { isUserSignedin, Component, updateUserSignInAction } = props;
+        const { isUserSignedin, Component, updateUserSignInAction, loadApiAction } = props;
         const jwtSessionToken = cookies.get('jwtSessionToken');
         const userId = cookies.get('id')
         const navigate = useNavigate();
         useEffect(() => {
             if (!isUserSignedin && jwtSessionToken && userId) {
+                loadApiAction({ showLoader: true, showTransparentPageLoad: false })
                 validateUserApi(userId, jwtSessionToken).then(
                     () => {
                         updateUserSignInAction({ isUserSignedin: true })
@@ -40,6 +43,10 @@ export const ProtectedLoggedIn = connect(mapStateToProps, mapDispatchToProps)(
                         cookies.remove('id')
                         sessionStorage.clear()
                         navigate('/login')
+                    }
+                ).finally(
+                    () => {
+                        loadApiAction({ showLoader: false, showTransparentPageLoad: true })
                     }
                 )
             }
@@ -58,9 +65,7 @@ export const ProtectedLoggedIn = connect(mapStateToProps, mapDispatchToProps)(
             return (<Component />)
         } else {
             if (jwtSessionToken && userId) {
-                return (
-                    <h1>Loading....</h1>
-                )
+                return null
             }
             return (<Navigate to={'/login'} />)
         }
