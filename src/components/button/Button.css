@@ -90,3 +90,8 @@
     transition: none;
     cursor: pointer;
 }
+
+.btn_remove_default_properties {
+    cursor: pointer;
+    border: 0px;
+}

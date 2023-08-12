@@ -1,13 +1,29 @@
 .header {
-    height: 120px;
-    padding-left: 43px;
-    padding-right: 43px;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
 .logo {
-    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+@media screen and (min-width: 993px) {
+    .header {
+        height: 120px;
+        padding-left: 43px;
+        padding-right: 43px;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .logo {
+        margin-right: auto;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
 }
 
 .nav_items {
@@ -15,5 +31,13 @@
 }
 
 .item1 {
+    margin-right: 41px;
+}
+
+.loggedin_nav_items {
+    display: flex;
+}
+
+.loggedin_item {
     margin-right: 41px;
 }
