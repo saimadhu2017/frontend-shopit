@@ -1,11 +1,11 @@
 import { toast } from 'react-toastify';
 import { connect } from 'react-redux';
 import cookies from "js-cookie";
-import { Navigate, useNavigate } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import { validateUserApi } from '../../apis/user';
 import { updateUserSignInAction } from '../../redux/session/sessionAction';
 import { loadApiAction } from '../../redux/loader/loaderAction';
+import { useNavigate } from 'react-router-dom';
 
 const mapDispatchToProps = (dispatch) => {
     return ({
@@ -20,7 +20,7 @@ const mapStateToProps = (state) => {
     })
 }
 
-export const ProtectedLoggedIn = connect(mapStateToProps, mapDispatchToProps)(
+export const ProtectedLoggedInAndAnon = connect(mapStateToProps, mapDispatchToProps)(
     (props) => {
         const { isUserSignedin, Component, updateUserSignInAction, loadApiAction } = props;
         const jwtSessionToken = cookies.get('jwtSessionToken');
@@ -56,7 +56,7 @@ export const ProtectedLoggedIn = connect(mapStateToProps, mapDispatchToProps)(
                 cookies.remove('jwtSessionToken')
                 cookies.remove('id')
                 sessionStorage.clear()
-                toast.error('Session expired please sign in..', {
+                toast.error('Session expired please sign in again..', {
                     position: toast.POSITION.TOP_CENTER
                 })
             }
@@ -69,7 +69,7 @@ export const ProtectedLoggedIn = connect(mapStateToProps, mapDispatchToProps)(
             if (jwtSessionToken && userId) {
                 return null
             }
-            return (<Navigate to={'/login'} />)
+            return (<Component />)
         }
     }
 )
