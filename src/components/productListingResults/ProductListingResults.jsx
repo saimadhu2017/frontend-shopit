@@ -8,7 +8,7 @@ export const ProductListingResults = (props) => {
             <div className="plr">
                 {
                     listOfProducts.map((product) => {
-                        const { product_name, brand_name, final_price, in_store, quantity_in_cart, product_id } = product
+                        const { product_name, brand_name, final_price, in_store, quantity_in_cart, product_id, striked_price } = product
                         return (
                             <div key={product_id} className='plr_product_card'>
                                 <ProductCard
@@ -17,6 +17,7 @@ export const ProductListingResults = (props) => {
                                     final_price={final_price}
                                     in_store={in_store}
                                     quantity_in_cart={quantity_in_cart}
+                                    striked_price={striked_price}
                                 />
                             </div>
                         )

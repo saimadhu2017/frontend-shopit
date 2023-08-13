@@ -8,7 +8,8 @@ export const ProductCard = (props) => {
         brand_name,
         final_price,
         in_store,
-        quantity_in_cart
+        quantity_in_cart,
+        striked_price
     } = props
     return (
         <div className='product_card'>
@@ -25,6 +26,7 @@ export const ProductCard = (props) => {
                         {'₹ '}
                     </span>
                     {final_price}
+                    <div className='striked_price'>{striked_price}</div>
                 </div>
             }
             <div className="product_card_action">
