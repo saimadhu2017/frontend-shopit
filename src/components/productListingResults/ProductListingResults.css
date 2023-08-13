@@ -1,6 +1,6 @@
 .plr {
     display: grid;
-    grid-template-columns: auto;
+    grid-template-columns: 80vw;
     grid-row-gap: 40px;
     justify-content: space-around;
     align-items: center;
@@ -12,7 +12,7 @@
 
 @media screen and (min-width: 630px) and (max-width: 992px) {
     .plr {
-        grid-template-columns: auto auto;
+        grid-template-columns: 40vw 40vw;
     }
 
     .plr_product_card {
@@ -22,7 +22,7 @@
 
 @media screen and (min-width: 993px) and (max-width: 1400px) {
     .plr {
-        grid-template-columns: auto auto auto;
+        grid-template-columns: 30vw 30vw 30vw;
     }
 
     .plr_product_card {
@@ -32,7 +32,7 @@
 
 @media screen and (min-width: 1401px) and (max-width: 1700px) {
     .plr {
-        grid-template-columns: auto auto auto auto;
+        grid-template-columns: 22vw 22vw 22vw 22vw;
     }
 
     .plr_product_card {
@@ -42,7 +42,7 @@
 
 @media screen and (min-width: 1701px) {
     .plr {
-        grid-template-columns: auto auto auto auto auto;
+        grid-template-columns: 18vw 18vw 18vw 18vw 18vw;
     }
 
     .plr_product_card {
