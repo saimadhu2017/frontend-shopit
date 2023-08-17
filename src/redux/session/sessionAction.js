@@ -6,3 +6,10 @@ export const updateUserSignInAction = (data) => {
         data
     })
 }
+
+export const updateUserCartQuantityAction = (data) => {
+    return ({
+        type: sessionTypes.UPDATE_CART_QUANTITY,
+        data
+    })
+}

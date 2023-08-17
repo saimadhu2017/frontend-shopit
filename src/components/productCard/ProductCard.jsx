@@ -9,7 +9,11 @@ export const ProductCard = (props) => {
         final_price,
         in_store,
         quantity_in_cart,
-        striked_price
+        striked_price,
+        product_id,
+        setListOfProducts,
+        index,
+        listOfProducts
     } = props
     return (
         <div className='product_card'>
@@ -31,7 +35,13 @@ export const ProductCard = (props) => {
             }
             <div className="product_card_action">
                 {
-                    !in_store ? <ProductAction actionType={'ooo'} /> : (!quantity_in_cart ? <ProductAction actionType={'add'} /> : <ProductAction actionType={'update'} quantity_in_cart={quantity_in_cart} />)
+                    !in_store ? <ProductAction actionType={'ooo'} /> : (<ProductAction
+                        actionType={!quantity_in_cart ? 'add' : 'update'}
+                        quantity_in_cart={quantity_in_cart}
+                        product_id={product_id}
+                        setListOfProducts={setListOfProducts}
+                        index={index}
+                        listOfProducts={listOfProducts} />)
                 }
             </div>
             <Button

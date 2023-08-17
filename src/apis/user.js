@@ -7,3 +7,11 @@ export const validateUserApi = (userid, token) => {
         }
     })
 }
+
+export const updateUserCartQuantityApi = (userid, token, data) => {
+    return axios.post(`${process.env.REACT_APP_BACKEND_API}/user/add-item-cart/${userid}`, data, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}

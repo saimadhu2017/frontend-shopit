@@ -10,7 +10,7 @@ const HomePage = () => {
             <div className="home_page_search_products">
                 <SearchProducts setListOfProducts={setListOfProducts} />
             </div>
-            <ProductListingResults listOfProducts={listOfProducts} />
+            <ProductListingResults listOfProducts={listOfProducts} setListOfProducts={setListOfProducts} />
         </React.Fragment>
     )
 }
