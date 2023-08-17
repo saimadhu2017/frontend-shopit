@@ -50,6 +50,7 @@ export const ProductAction = connect(mapStateToProps, mapDispatchToProps)(
                     <Button
                         buttonName='-'
                         classList={'btn btn_update_product_quantity'}
+                        onClick={() => { utils.updateQuantityInBag(0, { quantity_in_cart, product_id, totalCartQuantity, index, listOfProducts }, { updateUserCartQuantityAction, loadApiAction, setListOfProducts }) }}
                     />
                     <div className="product_quantity_value">
                         {quantity_in_cart}
@@ -57,6 +58,7 @@ export const ProductAction = connect(mapStateToProps, mapDispatchToProps)(
                     <Button
                         buttonName='+'
                         classList={'btn btn_update_product_quantity'}
+                        onClick={() => { utils.updateQuantityInBag(1, { quantity_in_cart, product_id, totalCartQuantity, index, listOfProducts }, { updateUserCartQuantityAction, loadApiAction, setListOfProducts }) }}
                     />
                 </div>
             )
