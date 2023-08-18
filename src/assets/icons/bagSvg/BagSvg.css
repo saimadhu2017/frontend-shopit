@@ -1,5 +1,14 @@
+.bag_svg_container {
+    display: flex;
+}
+
 .bag_svg {
     height: 40px;
     width: 40px;
     fill: black;
+}
+
+.bag_value {
+    color: black;
+    align-self: auto;
 }

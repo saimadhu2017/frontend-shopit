@@ -13,7 +13,8 @@ import { toast } from 'react-toastify';
 
 const mapStateToProps = (state) => {
     return ({
-        isUserSignedin: state.updateUserSignedIn.isUserSignedin
+        isUserSignedin: state.updateUserSignedIn.isUserSignedin,
+        totalCartQuantity: state.updateUserSignedIn.cartQuantity
     })
 }
 
@@ -26,7 +27,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const Header = connect(mapStateToProps, mapDispatchToProps)(
     (props) => {
-        const { isUserSignedin, updateUserSignInAction } = props
+        const { isUserSignedin, updateUserSignInAction, totalCartQuantity } = props
         const navigate = useNavigate();
         return (
             <div className="header">
@@ -44,7 +45,7 @@ const Header = connect(mapStateToProps, mapDispatchToProps)(
                 {
                     isUserSignedin && <div className='loggedin_nav_items'>
                         <Button buttonName={<HomeSvg />} classList='loggedin_item' navigatePath='/home' isNavigationType={true} />
-                        <Button buttonName={<BagSvg />} classList='loggedin_item' navigatePath='/bag' isNavigationType={true} />
+                        <Button buttonName={<BagSvg totalCartQuantity={totalCartQuantity} />} classList='loggedin_item' navigatePath='/bag' isNavigationType={true} />
                         <Button buttonName={<ProfileSvg />} classList='loggedin_item' navigatePath='/profile' isNavigationType={true} />
                         <Button buttonName={<LogoutSvg />} classList='btn_remove_default_properties' isNavigationType={false} onClick={() => { logout({ updateUserSignInAction, navigate }) }} />
                     </div>
