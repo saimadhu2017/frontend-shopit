@@ -4,13 +4,14 @@ import cookies from "js-cookie";
 import { Navigate, useNavigate } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import { validateUserApi } from '../../apis/user';
-import { updateUserSignInAction } from '../../redux/session/sessionAction';
+import { updateUserCartQuantityAction, updateUserSignInAction } from '../../redux/session/sessionAction';
 import { loadApiAction } from '../../redux/loader/loaderAction';
 
 const mapDispatchToProps = (dispatch) => {
     return ({
         updateUserSignInAction: (data) => { dispatch(updateUserSignInAction(data)) },
-        loadApiAction: (data) => { dispatch(loadApiAction(data)) }
+        loadApiAction: (data) => { dispatch(loadApiAction(data)) },
+        updateUserCartQuantityAction: (data) => { dispatch(updateUserCartQuantityAction(data)) }
     })
 }
 
@@ -22,7 +23,7 @@ const mapStateToProps = (state) => {
 
 export const ProtectedLoggedIn = connect(mapStateToProps, mapDispatchToProps)(
     (props) => {
-        const { isUserSignedin, Component, updateUserSignInAction, loadApiAction } = props;
+        const { isUserSignedin, Component, updateUserSignInAction, loadApiAction, updateUserCartQuantityAction } = props;
         const jwtSessionToken = cookies.get('jwtSessionToken');
         const userId = cookies.get('id')
         const navigate = useNavigate();
@@ -30,13 +31,16 @@ export const ProtectedLoggedIn = connect(mapStateToProps, mapDispatchToProps)(
             if (!isUserSignedin && jwtSessionToken && userId) {
                 loadApiAction({ showLoader: true, showTransparentPageLoad: false })
                 validateUserApi(userId, jwtSessionToken).then(
-                    () => {
+                    (response) => {
+                        const { userCartQuantity } = response?.data?.data || {}
                         updateUserSignInAction({ isUserSignedin: true })
+                        updateUserCartQuantityAction({ cartQuantity: userCartQuantity || 0 })
                         sessionStorage.setItem('sessionCreated', 'true')
                     }
                 ).catch(
                     () => {
                         updateUserSignInAction({ isUserSignedin: false })
+                        updateUserCartQuantityAction({ cartQuantity: 0 })
                         toast.error('Your Un-Authroised please sign In...', {
                             position: toast.POSITION.TOP_CENTER
                         })
@@ -53,6 +57,7 @@ export const ProtectedLoggedIn = connect(mapStateToProps, mapDispatchToProps)(
             }
             else if (!(jwtSessionToken && userId) && sessionStorage.getItem('sessionCreated') === 'true') {
                 updateUserSignInAction({ isUserSignedin: false })
+                updateUserCartQuantityAction({ cartQuantity: 0 })
                 cookies.remove('jwtSessionToken')
                 cookies.remove('id')
                 sessionStorage.clear()

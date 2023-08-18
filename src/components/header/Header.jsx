@@ -6,7 +6,7 @@ import HomeSvg from '../../assets/icons/homeSvg/HomeSvg';
 import BagSvg from '../../assets/icons/bagSvg/BagSvg';
 import LogoutSvg from '../../assets/icons/logoutSvg/LogoutSvg';
 import { connect } from 'react-redux';
-import { updateUserSignInAction } from '../../redux/session/sessionAction';
+import { updateUserCartQuantityAction, updateUserSignInAction } from '../../redux/session/sessionAction';
 import { useNavigate } from 'react-router-dom';
 import cookies from "js-cookie";
 import { toast } from 'react-toastify';
@@ -20,14 +20,15 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return ({
-        updateUserSignInAction: (data) => { dispatch(updateUserSignInAction(data)) }
+        updateUserSignInAction: (data) => { dispatch(updateUserSignInAction(data)) },
+        updateUserCartQuantityAction: (data) => { dispatch(updateUserCartQuantityAction(data)) }
     })
 }
 
 
 const Header = connect(mapStateToProps, mapDispatchToProps)(
     (props) => {
-        const { isUserSignedin, updateUserSignInAction, totalCartQuantity } = props
+        const { isUserSignedin, updateUserSignInAction, totalCartQuantity, updateUserCartQuantityAction } = props
         const navigate = useNavigate();
         return (
             <div className="header">
@@ -47,7 +48,7 @@ const Header = connect(mapStateToProps, mapDispatchToProps)(
                         <Button buttonName={<HomeSvg />} classList='loggedin_item' navigatePath='/home' isNavigationType={true} />
                         <Button buttonName={<BagSvg totalCartQuantity={totalCartQuantity} />} classList='loggedin_item' navigatePath='/bag' isNavigationType={true} />
                         <Button buttonName={<ProfileSvg />} classList='loggedin_item' navigatePath='/profile' isNavigationType={true} />
-                        <Button buttonName={<LogoutSvg />} classList='btn_remove_default_properties' isNavigationType={false} onClick={() => { logout({ updateUserSignInAction, navigate }) }} />
+                        <Button buttonName={<LogoutSvg />} classList='btn_remove_default_properties' isNavigationType={false} onClick={() => { logout({ updateUserSignInAction, navigate, updateUserCartQuantityAction }) }} />
                     </div>
                 }
             </div>
@@ -57,8 +58,9 @@ const Header = connect(mapStateToProps, mapDispatchToProps)(
 )
 
 const logout = (methods) => {
-    const { updateUserSignInAction, navigate } = methods;
+    const { updateUserSignInAction, navigate, updateUserCartQuantityAction } = methods;
     updateUserSignInAction({ isUserSignedin: false })
+    updateUserCartQuantityAction({ cartQuantity: 0 })
     cookies.remove('jwtSessionToken')
     cookies.remove('id')
     sessionStorage.clear()

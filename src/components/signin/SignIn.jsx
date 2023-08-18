@@ -7,22 +7,17 @@ import { toast } from 'react-toastify';
 import * as utils from './SignIn';
 import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { updateUserSignInAction } from '../../redux/session/sessionAction'
+import { updateUserCartQuantityAction, updateUserSignInAction } from '../../redux/session/sessionAction'
 import cookies from "js-cookie";
 
 const mapDispatchToProps = (dispatch) => {
     return ({
-        updateUserSignInAction: (data) => { dispatch(updateUserSignInAction(data)) }
+        updateUserSignInAction: (data) => { dispatch(updateUserSignInAction(data)) },
+        updateUserCartQuantityAction: (data) => { dispatch(updateUserCartQuantityAction(data)) }
     })
 }
 
-const mapStateToProps = (state) => {
-    return ({
-        ...state
-    })
-}
-
-export const SignIn = connect(mapStateToProps, mapDispatchToProps)(
+export const SignIn = connect(null, mapDispatchToProps)(
     (props) => {
         const [formData, setFormData] = useState({
             mail: {
@@ -121,6 +116,7 @@ export const readyToSignInUser = (formData, disableSubmitButton, setDisableSubmi
                 cookies.set('id', data?.userId, { expires: inOneMinute })
                 sessionStorage.setItem('sessionCreated', 'true')
                 props.updateUserSignInAction({ isUserSignedin: true })
+                props.updateUserCartQuantityAction({ cartQuantity: data?.userCartQuantity || 0 })
                 setDisableSubmitButton(!disableSubmitButton)
                 navigate('/home')
                 return (status === 'success' ? 'Sign In Successfull' : 'We cannot Sign you in now please try later..')
