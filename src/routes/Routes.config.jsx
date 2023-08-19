@@ -3,14 +3,9 @@ import { ProtectedLoggedIn } from "../components/protectedLoggedIn/ProtectedLogg
 import { ProtectedLoggedInAndAnon } from "../components/protectedLoggedInAndAnon/ProtectedLoggedInAndAnon";
 import HomePage from "../pages/home/HomePage";
 import LoginPage from "../pages/login/LoginPage";
+import NotFoundPage from "../pages/notFound/NotFoundPage";
 import RootPage from "../pages/root/RootPage";
 import SignUpPage from "../pages/signup/SignUpPage";
-
-const NotFound = () => {
-    return (
-        <h1>Seems like you are lost...</h1>
-    )
-}
 
 const routeList = [
     {
@@ -31,7 +26,7 @@ const routeList = [
     },
     {
         path: '*',
-        element: <ProtectedLoggedInAndAnon Component={NotFound} />
+        element: <ProtectedLoggedInAndAnon Component={NotFoundPage} />
     }
 ]
 

@@ -1,11 +1,15 @@
 .banner {
-    background: linear-gradient(180deg, rgba(106, 33, 10, 0.71) 0%, rgba(0, 0, 0, 0.71) 83.33%);
+    background: linear-gradient(180deg, rgba(10, 106, 31, 0.71) 0%, rgba(0, 0, 0, 0.71) 83.33%);
     height: 60vh;
     width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.not_found_banner {
+    background: linear-gradient(180deg, rgba(255, 0, 0, 0.71) 0%, rgba(0, 0, 0, 0.71) 83.33%);
 }
 
 .banner_tittle {
