@@ -95,3 +95,9 @@
     cursor: pointer;
     border: 0px;
 }
+
+.shop_now_btn {
+    background-color: #DFCEC9;
+    color: black;
+    font-size: 15px;
+}
